@@ -56,11 +56,11 @@ public class BlockQueue<T> {
         try {
             while (queue.size() >= capacity) {
                 // 如果队列已满，则阻塞等待
-                System.out.println("["+Thread.currentThread().getName()+"] "+t+" 请求入队，此时队列已满，阻塞等待");
+                System.out.println("【"+Thread.currentThread().getName()+"】 尝试入队元素：【"+t+"】，请求入队，此时队列已满，阻塞等待");
                 notFull.await();
             }
             // 入队
-            System.out.println("["+Thread.currentThread().getName()+"] "+t+" 入队成功");
+            System.out.println("【"+Thread.currentThread().getName()+"】 尝试入队元素：【"+t+"】，入队成功");
             queue.add(t);
             // 已有数据，通知所有等待出队的线程
             notEmpty.signalAll();
@@ -79,11 +79,11 @@ public class BlockQueue<T> {
         try {
             while (queue.isEmpty()) {
                 // 如果队列已空，则阻塞等待
-                System.out.println("["+Thread.currentThread().getName()+"] 请求出队，此时队列已空，阻塞等待");
+                System.out.println("【"+Thread.currentThread().getName()+"】 请求出队，此时队列已空，阻塞等待");
                 notEmpty.await();
             }
             // 出队
-            System.out.println("["+Thread.currentThread().getName()+"] 出队成功");
+            System.out.println("【"+Thread.currentThread().getName()+"】 请求出队，元素为：【"+queue.get(0)+"】，出队成功");
             T result = queue.remove(0);
             // 队列已有空位，通知所有等待入队的线程
             notFull.signalAll();

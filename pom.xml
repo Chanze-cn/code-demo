@@ -92,6 +92,12 @@
                 <configuration>
                     <source>8</source>
                     <target>8</target>
+                    <compilerArgs>
+                        <arg>-parameters</arg>
+                    </compilerArgs>
+                    <annotationProcessorPaths>
+                        <!-- 启用增量编译 -->
+                    </annotationProcessorPaths>
                 </configuration>
             </plugin>
 

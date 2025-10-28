@@ -117,77 +117,16 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
 
 ## 📖 学习内容
 
-### 当前已实现的功能和笔记
+### Java并发编程
 
-#### 1. Java并发编程
-
-##### 代码实践
-- **BlockQueue类**: 基于ReentrantLock和Condition实现的阻塞队列
-  - 使用管程模式解决生产者-消费者问题
-  - 支持多线程安全的入队(enqueue)和出队(dequeue)操作
-  - 队列满时入队操作会阻塞等待
-  - 队列空时出队操作会阻塞等待
-  - 使用Condition条件变量实现精确的线程通知机制
-
-##### 学习笔记
-- **管程原理与实践** (`notebook/java-concurrency/管程.md`)
-  - MESA管程模型详解
-  - Hasen、Hoare、MESA三种管程模型的对比
-  - 管程的实现方式和优势
-
-#### 2. MySQL数据库原理
-
-##### 事务隔离 (`notebook/mysql/事务隔离/事务隔离.md`)
-- **ACID特性**：原子性、一致性、隔离性、持久性的深入理解
-- **事务隔离级别**：四种隔离级别的详细对比和实际效果
-- **MVCC机制**：多版本并发控制的实现原理
-- **视图机制**：不同隔离级别下的视图创建时机
-- **长事务风险**：长事务的危害和避免方法
-
-##### MySQL日志体系 (`notebook/mysql/MySQL日志体系/mysql日志体系.md`)
-- **redo log（重做日志）**：
-  - InnoDB引擎层的物理日志
-  - WAL技术（Write-Ahead Logging）
-  - crash-safe能力实现机制
-  - 循环写入的日志结构
-- **binlog（二进制日志）**：
-  - Server层的逻辑日志
-  - 数据恢复和主从复制
-- **两阶段提交（2PC）**：
-  - redo log和binlog的一致性保证
-  - 崩溃恢复时的处理机制
-  - 数据一致性原理
-
-#### 3. 单元测试
-- **JUnit 5测试**: 演示测试驱动开发
-  - BlockQueueTest类测试多线程并发场景
-  - 生产者-消费者模式的多线程测试
-  - 线程安全性和同步机制验证
-
-#### 4. 项目构建和依赖管理
-- **Maven多模块项目**: 支持模块化开发
-  - 父级pom.xml管理公共依赖和插件
-  - java-concurrency子模块专注于并发编程学习
-  - 集成JUnit 5、AssertJ、Mockito等测试框架
-
-### 计划学习的内容
-
-#### 设计模式
-- [ ] 单例模式 (Singleton)
-- [ ] 工厂模式 (Factory)
-- [ ] 观察者模式 (Observer)
-- [ ] 策略模式 (Strategy)
-- [ ] 装饰器模式 (Decorator)
-- [ ] 建造者模式 (Builder)
-
-#### 集合框架
-- [ ] List接口及其实现类
-- [ ] Set接口及其实现类
-- [ ] Map接口及其实现类
-- [ ] 流式处理 (Stream API)
-
-#### 并发编程
-- [x] 管程 (Monitor) - BlockQueue实现
+#### 代码实践
+- [x] **管程 (Monitor)** - BlockQueue实现
+  - [x] 基于ReentrantLock和Condition实现的阻塞队列
+  - [x] 使用管程模式解决生产者-消费者问题
+  - [x] 支持多线程安全的入队(enqueue)和出队(dequeue)操作
+  - [x] 队列满时入队操作会阻塞等待
+  - [x] 队列空时出队操作会阻塞等待
+  - [x] 使用Condition条件变量实现精确的线程通知机制
 - [ ] 线程基础
 - [ ] 同步机制 (synchronized, Lock)
 - [ ] 线程池 (ThreadPoolExecutor)
@@ -195,62 +134,133 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
 - [ ] 并发集合 (ConcurrentHashMap等)
 - [ ] CompletableFuture
 - [ ] Fork/Join框架
-- [x] 生产者消费者模式 - BlockQueue示例
 - [ ] 读写锁 (ReadWriteLock)
 - [ ] 信号量 (Semaphore)
 - [ ] 倒计时器 (CountDownLatch)
 - [ ] 循环屏障 (CyclicBarrier)
 
-#### 框架学习
+#### 学习笔记
+- [x] **管程原理与实践** (`notebook/java-concurrency/管程.md`)
+  - [x] MESA管程模型详解
+  - [x] Hasen、Hoare、MESA三种管程模型的对比
+  - [x] 管程的实现方式和优势
 
-##### Web框架
+### MySQL数据库原理
+
+#### 事务隔离 (`notebook/mysql/事务隔离/事务隔离.md`)
+- [x] **ACID特性**：原子性、一致性、隔离性、持久性的深入理解
+- [x] **事务隔离级别**：四种隔离级别的详细对比和实际效果
+- [x] **MVCC机制**：多版本并发控制的实现原理
+- [x] **视图机制**：不同隔离级别下的视图创建时机
+- [x] **长事务风险**：长事务的危害和避免方法
+- [ ] 锁机制详解
+- [ ] 死锁检测与处理
+
+#### MySQL日志体系 (`notebook/mysql/MySQL日志体系/mysql日志体系.md`)
+- [x] **redo log（重做日志）**
+  - [x] InnoDB引擎层的物理日志
+  - [x] WAL技术（Write-Ahead Logging）
+  - [x] crash-safe能力实现机制
+  - [x] 循环写入的日志结构
+- [x] **binlog（二进制日志）**
+  - [x] Server层的逻辑日志
+  - [x] 数据恢复和主从复制
+- [x] **两阶段提交（2PC）**
+  - [x] redo log和binlog的一致性保证
+  - [x] 崩溃恢复时的处理机制
+  - [x] 数据一致性原理
+- [ ] undo log详解
+- [ ] 慢查询日志
+- [ ] 错误日志
+
+### 设计模式
+
+- [ ] 单例模式 (Singleton)
+- [ ] 工厂模式 (Factory)
+- [ ] 观察者模式 (Observer)
+- [ ] 策略模式 (Strategy)
+- [ ] 装饰器模式 (Decorator)
+- [ ] 建造者模式 (Builder)
+- [ ] 适配器模式 (Adapter)
+- [ ] 代理模式 (Proxy)
+- [ ] 模板方法模式 (Template Method)
+
+### 集合框架
+
+- [ ] List接口及其实现类
+- [ ] Set接口及其实现类
+- [ ] Map接口及其实现类
+- [ ] 流式处理 (Stream API)
+- [ ] Optional使用
+- [ ] 集合性能优化
+
+### 框架学习
+
+#### Web框架
 - [ ] Spring Framework基础
 - [ ] Spring Boot
 - [ ] Spring MVC
 - [ ] Spring Security
 - [ ] Spring Data JPA
 
-##### 数据访问框架
+#### 数据访问框架
 - [ ] MyBatis
 - [ ] MyBatis-Plus
 - [ ] Hibernate
 - [ ] JPA (Java Persistence API)
 
-##### 缓存框架
+#### 缓存框架
 - [ ] Redis集成
 - [ ] Caffeine
 - [ ] EhCache
 
-##### 消息队列
+#### 消息队列
 - [ ] RabbitMQ
 - [ ] Apache Kafka
 - [ ] RocketMQ
 
-##### 微服务框架
+#### 微服务框架
 - [ ] Spring Cloud
 - [ ] Dubbo
 - [ ] Nacos
 - [ ] Gateway
 
-##### 工具框架
+#### 工具框架
 - [ ] Lombok
 - [ ] MapStruct
 - [ ] Jackson
 - [ ] Gson
 - [ ] Apache Commons
 
-##### 测试框架
+#### 测试框架
+- [x] JUnit 5 - 演示测试驱动开发
+  - [x] BlockQueueTest类测试多线程并发场景
+  - [x] 生产者-消费者模式的多线程测试
+  - [x] 线程安全性和同步机制验证
 - [ ] Mockito
 - [ ] TestContainers
 - [ ] WireMock
 - [ ] AssertJ
 
-#### 其他主题
+### 项目构建和依赖管理
+
+- [x] **Maven多模块项目**
+  - [x] 父级pom.xml管理公共依赖和插件
+  - [x] java-concurrency子模块专注于并发编程学习
+  - [x] 集成JUnit 5、AssertJ、Mockito等测试框架
+- [ ] Gradle构建
+- [ ] 持续集成/持续部署 (CI/CD)
+
+### 其他主题
+
 - [ ] 注解 (Annotations)
 - [ ] 反射 (Reflection)
 - [ ] 泛型 (Generics)
 - [ ] Lambda表达式
 - [ ] 函数式编程
+- [ ] IO/NIO
+- [ ] 网络编程
+- [ ] JVM调优
 
 ## 🔍 核心实现解析
 

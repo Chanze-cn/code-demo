@@ -1,16 +1,23 @@
-# Java 学习代码库
+# Code Demo 学习代码库
 
-> 这是一个用于学习Java编程语言和相关框架的代码演示项目，包含各种编程概念、设计模式和框架使用的示例代码。
+> 这是一个综合性的技术学习代码库，包含Java编程实践、MySQL数据库原理等技术学习和笔记。
 
 ## 📚 项目简介
 
-本项目旨在通过实际的代码示例来学习和掌握Java编程的各个方面，包括：
+本项目旨在通过实际的代码示例和详细的学习笔记来深入理解各种技术原理，包括：
+
+### 代码实践模块
+- **Java并发编程**：管程、线程同步、生产者-消费者模式等
 - 基础Java语法和面向对象编程
-- Java并发编程（管程、线程同步等）
 - 常用设计模式
 - 主流框架的使用
 - 测试驱动开发(TDD)
 - 项目构建和依赖管理
+
+### 学习笔记模块
+- **Java并发编程笔记**：管程原理与实践
+- **MySQL数据库笔记**：事务隔离、日志体系等核心原理
+- 技术原理的深入理解和总结
 
 ## 🛠️ 技术栈
 
@@ -44,7 +51,18 @@ code-demo/
 │   │       │               └── BlockQueueTest.java # BlockQueue测试类
 │   │       └── resources/                        # 测试资源文件
 │   └── target/                                   # 编译输出目录
-└── src/                                          # 根模块源码（预留）
+├── notebook/                        # 学习笔记目录
+│   ├── java-concurrency/            # Java并发编程笔记
+│   │   └── 管程.md                  # 管程原理与实践
+│   ├── mysql/                       # MySQL数据库笔记
+│   │   ├── 事务隔离/                # 事务隔离笔记
+│   │   │   ├── 事务隔离.md
+│   │   │   └── image/              # 相关图片资源
+│   │   └── MySQL日志体系/           # MySQL日志体系笔记
+│   │       ├── mysql日志体系.md
+│   │       └── image/              # 相关图片资源
+│   └── image/                       # 笔记图片资源
+└── src/                             # 根模块源码（预留）
     └── test/
         └── java/
             └── cn/
@@ -99,9 +117,11 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
 
 ## 📖 学习内容
 
-### 当前已实现的功能
+### 当前已实现的功能和笔记
 
-#### 1. Java并发编程 - 管程(Monitor)示例
+#### 1. Java并发编程
+
+##### 代码实践
 - **BlockQueue类**: 基于ReentrantLock和Condition实现的阻塞队列
   - 使用管程模式解决生产者-消费者问题
   - 支持多线程安全的入队(enqueue)和出队(dequeue)操作
@@ -109,13 +129,42 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
   - 队列空时出队操作会阻塞等待
   - 使用Condition条件变量实现精确的线程通知机制
 
-#### 2. 单元测试
+##### 学习笔记
+- **管程原理与实践** (`notebook/java-concurrency/管程.md`)
+  - MESA管程模型详解
+  - Hasen、Hoare、MESA三种管程模型的对比
+  - 管程的实现方式和优势
+
+#### 2. MySQL数据库原理
+
+##### 事务隔离 (`notebook/mysql/事务隔离/事务隔离.md`)
+- **ACID特性**：原子性、一致性、隔离性、持久性的深入理解
+- **事务隔离级别**：四种隔离级别的详细对比和实际效果
+- **MVCC机制**：多版本并发控制的实现原理
+- **视图机制**：不同隔离级别下的视图创建时机
+- **长事务风险**：长事务的危害和避免方法
+
+##### MySQL日志体系 (`notebook/mysql/MySQL日志体系/mysql日志体系.md`)
+- **redo log（重做日志）**：
+  - InnoDB引擎层的物理日志
+  - WAL技术（Write-Ahead Logging）
+  - crash-safe能力实现机制
+  - 循环写入的日志结构
+- **binlog（二进制日志）**：
+  - Server层的逻辑日志
+  - 数据恢复和主从复制
+- **两阶段提交（2PC）**：
+  - redo log和binlog的一致性保证
+  - 崩溃恢复时的处理机制
+  - 数据一致性原理
+
+#### 3. 单元测试
 - **JUnit 5测试**: 演示测试驱动开发
   - BlockQueueTest类测试多线程并发场景
   - 生产者-消费者模式的多线程测试
   - 线程安全性和同步机制验证
 
-#### 3. 项目构建和依赖管理
+#### 4. 项目构建和依赖管理
 - **Maven多模块项目**: 支持模块化开发
   - 父级pom.xml管理公共依赖和插件
   - java-concurrency子模块专注于并发编程学习
@@ -317,10 +366,34 @@ mvn jacoco:report
 - SonarLint
 - CheckStyle
 
+## 📝 学习笔记
+
+本项目的笔记位于 `notebook/` 目录下，包含以下内容：
+
+### Java并发编程笔记
+- **管程.md**：详细介绍了MESA管程模型，包括三种管程模型的对比和实际应用
+
+### MySQL数据库笔记
+
+#### 事务隔离
+- 深入理解ACID特性
+- 四种隔离级别的详细对比和实际效果示例
+- MVCC（多版本并发控制）的实现原理
+- 事务启动方式和长事务的注意事项
+
+#### MySQL日志体系
+- redo log和binlog的结构和作用
+- 两阶段提交机制的原理和必要性
+- 数据恢复机制的实践应用
+- crash-safe能力的实现原理
+
+所有笔记都包含详细的原理说明、实际示例和实践建议，适合深入学习相关技术原理。
+
 ## 📚 学习资源
 
 ### 官方文档
 - [Java官方文档](https://docs.oracle.com/en/java/)
+- [MySQL官方文档](https://dev.mysql.com/doc/)
 - [Maven官方文档](https://maven.apache.org/guides/)
 - [JUnit 5官方文档](https://junit.org/junit5/docs/current/user-guide/)
 
@@ -328,7 +401,13 @@ mvn jacoco:report
 - 《Java核心技术》
 - 《Effective Java》
 - 《Java并发编程实战》
+- 《高性能MySQL》
+- 《MySQL技术内幕：InnoDB存储引擎》
 - 《Spring实战》
+
+### 在线课程
+- 极客时间《Java并发编程实战》
+- 极客时间《MySQL实战45讲》
 
 ### 在线资源
 - [菜鸟教程 - Java](https://www.runoob.com/java/java-tutorial.html)

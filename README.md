@@ -169,7 +169,7 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
   - [x] redo log和binlog的一致性保证
   - [x] 崩溃恢复时的处理机制
   - [x] 数据一致性原理
-- [ ] undo log详解
+- [x] undo log详解
 - [ ] 慢查询日志
 - [ ] 错误日志
 

@@ -75,6 +75,71 @@ binlog日志文件用于：
    - redo log：固定大小的循环队列，空间用完会覆盖（但必须确保已持久化的数据才能被覆盖）
    - binlog：追加写入，文件可以一直增长（需要定期清理或归档）
 
+
+
+## undo log日志
+
+### 简介
+undo log日志是InnoDB引擎层的日志，通过该机制来实现事务的原子性和MVCC。在事务开始前记录数据更新前的状态，用于回滚操作或提供多版本数据，在事务提交后，通过Purge线程回收不再需要的undo log。
+
+### 核心作用
+1. **支持事务的原子性，提供回滚操作**
+  - 在进行数据更新操作的时候，不仅会记录redo log，还会记录undo log，用于某些原因导致事务回滚，就可以利用 undo log将数据恢复到事务开始之前的状态。
+2. **支持MVCC（多版本并发控制，Multi-Version Concurrency Control）**
+  - 在InnoDB引擎中，用undo log来实现多版本并发控制。这一部分内容在[事务隔离](../事务隔离/事务隔离.md)章节有详细介绍，不在此赘述。简单来说，就是会按照事务隔离级别，在不同时机创建视图，来保证事务在执行期间看到的数据前后必须是一致的。
+
+### 存储机制
+
+undo log日志文件存储机制如下图所示：
+
+![undo log日志文件存储机制](./image/undo%20日志文件存储机制.png)
+
+undo log日志里面不仅存放着数据更新前的记录，还记录着RowID、事务ID、回滚指针。其中事务ID每次递增，回滚指针第一次如果是`insert`操作，则指向NULL，第二次`update`操作之后的undo log回滚指针会指向刚刚那条undo log。以此类推，会形成一条undo log的回滚链。
+
+### 工作原理
+
+在更新数据之前，MySQL回提前生成undo log日志，当事务提交的时候，并不会立即删除undo log日志，因为后面可能需要进行回滚操作，要执行回滚操作时，从缓存读取数据，undo log日志的删除是后台通过`purge`线程来进行回收处理的。
+
+![undo log的工作原理](./image/undolog%20工作原理.png)
+
+如上图：
+1. 事务A执行`update`操作，此时事务还没有提交，会将数据进行备份到对应的undo buffer，然后由undo buffer持久化到磁盘中的undo log文件中，此时undo log保存了未提交之前的操作日志，接着将操作的数据，也就是`Teacher`表的数据持久保存到InnoDB的数据文件IBD.
+2. 此时事务B进行查询操作，直接从undo buffer缓存中进行读取，此时事务A还没有提交事务，如果要回滚事务，是不读磁盘的，先直接从undo buffer缓存读取。
+
+
+### undo log 的类型
+在 InnoDB 存储引擎中，undo log 主要分为以下几种类型：
+1. insert undo log：事务对 `insert` 操作的undo log。因为`insert`操作的记录，只对事务本身可见，对其他事务不可见（这是事务隔离性的要求），故该undolog可以在事务提交后直接删除，不需要进行`purge`操作，因为事务提交后不可能再产生事务性回滚了。
+2. update undo log：事务对 `update` 或 `delete` 操作的undo log，该undo log可能需要提供MVCC机制，因此不能在事务提交时就进行删除。提交时放入undo log链表，等待`purge`线程进行最后的删除
+
+### undo log的工作流程
+以一个简单的例子来说明undo log的工作流程：
+假设有2 个数值，A=1和B=2，现在要执行以下操作：
+将A修改为3，B修改为4；
+
+``` sql
+1. start transaction;
+2．记录A=1到Undo Log;
+3. update A = 3;
+4．记录A=3 到Redo Log;
+5．记录B=2到Undo Log;
+6. update B = 4;
+7．记录B=4到Redo Log;
+8．将Redo Log刷新到磁盘;
+9. commit
+
+```
+
+- 在1-8步骤的任意一步，系统宕机，事务未提交，该事务不会对磁盘上的数据产生任何影响。
+- 在8-9之间宕机
+Redo log进行回复
+undo log发现事务没完成进行回滚
+- 在9之后系统宕机，内存映射中变更的数据还来不及刷回磁盘，那么系统恢复之后，可以根据redolog把数据刷回磁盘。
+
+完整流程示意图如下所示:
+![undo log工作流程](./image/undolog%20日志的工作流程.png)
+
+
 ## 更新语句的执行流程
 
 下面以一条更新语句为例，详细说明执行器和InnoDB引擎是如何协作的：

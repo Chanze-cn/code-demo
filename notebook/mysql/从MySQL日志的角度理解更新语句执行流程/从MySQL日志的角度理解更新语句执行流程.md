@@ -245,3 +245,16 @@ MySQL通过以下机制保证数据完整性和一致性：
 - 未提交的事务不影响数据
 - 日志文件保持一致
 - 系统具备crash-safe能力
+
+---
+
+## 相关阅读
+
+- [事务隔离](../事务隔离/事务隔离.md) - ACID特性、MVCC机制详解
+- [MySQL日志体系](../MySQL日志体系/mysql日志体系.md) - redo log、binlog、undo log深入分析
+- [MySQL索引原理](../MySQL索引原理/MySQL索引原理（上）.md) - B+树索引结构
+- [MySQL索引原理（下）](../MySQL索引原理/MySQL索引原理（下）.md) - 索引优化实践
+
+## 参考资料
+
+- 极客时间《MySQL实战45讲》课程

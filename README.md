@@ -155,13 +155,17 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
 ### MySQL数据库原理
 
 #### 事务隔离 (`notebook/mysql/事务隔离/事务隔离.md`)
-- [x] **ACID特性**：原子性、一致性、隔离性、持久性的深入理解
-- [x] **事务隔离级别**：四种隔离级别的详细对比和实际效果
-- [x] **MVCC机制**：多版本并发控制的实现原理
-- [x] **视图机制**：不同隔离级别下的视图创建时机
-- [x] **长事务风险**：长事务的危害和避免方法
-- [ ] 锁机制详解
-- [ ] 死锁检测与处理
+- [x] **ACID特性**：原子性、一致性、隔离性、持久性
+- [x] **隔离级别**：四级对比与实际效果
+- [x] **MVCC**：多版本并发控制的实现
+- [x] **视图机制**：不同隔离级别下的创建时机
+- [x] **长事务**：风险与规避
+- [x] **锁机制精炼**：
+  - 全局锁（FTWRL）
+  - 表级锁：表锁与元数据锁（MDL）
+  - 行锁与两阶段锁（InnoDB）
+  - 死锁与热点场景优化
+  - 笔记：`notebook/mysql/MySQL的锁/MySQL的锁.md`
 
 #### MySQL日志体系 (`notebook/mysql/MySQL日志体系/mysql日志体系.md`)
 - [x] **redo log（重做日志）**
@@ -217,16 +221,34 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
 
 
 ### 设计模式
-
+#### 创建型模式
 - [ ] 单例模式 (Singleton)
-- [ ] 工厂模式 (Factory)
+- [ ] 工厂方法模式 (Factory Method)
+- [ ] 抽象工厂模式 (Abstract Factory)
+- [ ] 建造者模式 (Builder)
+- [ ] 原型模式 (Prototype)
+
+#### 结构型模式
+- [ ] 适配器模式 (Adapter)
+- [ ] 装饰器模式 (Decorator)
+- [ ] 代理模式 (Proxy)
+- [ ] 外观模式 (Facade)
+- [ ] 桥接模式 (Bridge)
+- [ ] 组合模式 (Composite)
+- [ ] 享元模式 (Flyweight)
+
+#### 行为型模式
 - [ ] 观察者模式 (Observer)
 - [ ] 策略模式 (Strategy)
-- [ ] 装饰器模式 (Decorator)
-- [ ] 建造者模式 (Builder)
-- [ ] 适配器模式 (Adapter)
-- [ ] 代理模式 (Proxy)
 - [ ] 模板方法模式 (Template Method)
+- [ ] 责任链模式 (Chain of Responsibility)
+- [ ] 命令模式 (Command)
+- [ ] 迭代器模式 (Iterator)
+- [ ] 状态模式 (State)
+- [ ] 备忘录模式 (Memento)
+- [ ] 解释器模式 (Interpreter)
+- [ ] 访问者模式 (Visitor)
+- [ ] 中介者模式 (Mediator)
 
 ### 集合框架
 

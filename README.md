@@ -18,6 +18,7 @@
 - **Java并发编程笔记**：管程原理与实践
 - **MySQL数据库笔记**：事务隔离、日志体系等核心原理
 - 技术原理的深入理解和总结
+- [x] **Kafka核心组件梳理**：Producer、Consumer、Broker、Controller 等关键职责与协作关系（`notebook/Kafka/kafka核心组件.md`）
 
 
 ### 面试题模块
@@ -62,7 +63,7 @@ code-demo/
 ├── notebook/                        # 学习笔记目录
 │   ├── java-concurrency/            # Java并发编程笔记
 │   │   └── 管程.md                  # 管程原理与实践
-│   ├── mysql/                       # MySQL数据库笔记
+│   ├── MySQL/                       # MySQL数据库笔记
 │   │   ├── 事务隔离/                # 事务隔离笔记
 │   │   │   ├── 事务隔离.md
 │   │   │   └── image/              # 相关图片资源
@@ -76,6 +77,8 @@ code-demo/
 │   │   └── 从MySQL日志的角度理解更新语句执行流程/
 │   │       ├── 从MySQL日志的角度理解更新语句执行流程.md
 │   │       └── image/              # 相关图片资源
+│   ├── Kafka/                       # Kafka相关笔记
+│   │   └── kafka核心组件.md
 │   └── image/                       # 笔记图片资源
 └── src/                             # 根模块源码（预留）
     └── test/
@@ -159,10 +162,16 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
   - [x] MESA管程模型详解
   - [x] Hasen、Hoare、MESA三种管程模型的对比
   - [x] 管程的实现方式和优势
+- [x] **Kafka核心组件梳理** (`notebook/Kafka/kafka核心组件.md`)
+  - [x] 生产者（Producer）与发送语义
+  - [x] 消费者（Consumer）与消费组
+  - [x] Broker、Topic、Partition、Replica
+  - [x] Controller 角色与分区领导者选举
+  - [x] 存储层（Segment/Index）与位移（Offset）
 
 ### MySQL数据库原理
 
-#### 事务隔离 (`notebook/mysql/事务隔离/事务隔离.md`)
+#### 事务隔离 (`notebook/MySQL/事务隔离/事务隔离.md`)
 - [x] **ACID特性**：原子性、一致性、隔离性、持久性
 - [x] **隔离级别**：四级对比与实际效果
 - [x] **MVCC**：多版本并发控制的实现
@@ -173,9 +182,9 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
   - 表级锁：表锁与元数据锁（MDL）
   - 行锁与两阶段锁（InnoDB）
   - 死锁与热点场景优化
-  - 笔记：`notebook/mysql/MySQL的锁/MySQL的锁.md`
+  - 笔记：`notebook/MySQL/MySQL的锁/MySQL的锁.md`
 
-#### MySQL日志体系 (`notebook/mysql/MySQL日志体系/mysql日志体系.md`)
+#### MySQL日志体系 (`notebook/MySQL/MySQL日志体系/mysql日志体系.md`)
 - [x] **redo log（重做日志）**
   - [x] InnoDB引擎层的物理日志
   - [x] WAL技术（Write-Ahead Logging）
@@ -433,7 +442,7 @@ mvn jacoco:report
 - 使用中文注释，便于理解
 
 ### 代码格式
-- 使用4个空格缩进
+- 使用2个空格缩进
 - 每行代码不超过120个字符
 - 大括号使用K&R风格
 
@@ -484,6 +493,9 @@ mvn jacoco:report
 - undo log、redo log、binlog的协同工作
 - 各步骤的宕机恢复机制
 - 两阶段提交的作用和必要性
+
+### Kafka笔记
+- **kafka核心组件.md**：梳理 Producer、Consumer、Broker、Controller 等核心组件的职责与协作关系，配合存储结构与位移管理理解端到端消息流转（路径：`notebook/Kafka/kafka核心组件.md`）
 
 所有笔记都包含详细的原理说明、实际示例和实践建议，适合深入学习相关技术原理。
 

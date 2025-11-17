@@ -209,7 +209,12 @@ mvn exec:java -Dexec.mainClass="cn.chanze.Main"
   - [x] 主键索引（聚集索引）vs 非主键索引（二级索引）
   - [x] 索引维护机制（页分裂、页合并）
   - [x] 主键选择的最佳实践（自增主键的优势）
-  - [ ] 索引分类（唯一索引、普通索引、全文索引）
+  - [x] **普通索引与唯一索引的区别** (`MySQL普通索引和唯一索引的区别.md`)
+    - [x] 查询性能差异分析（性能差距微乎其微）
+    - [x] Change Buffer 机制与 Merge 操作
+    - [x] 更新性能差异（唯一索引 vs 普通索引）
+    - [x] Change Buffer 的使用限制与适用场景
+  - [ ] 索引分类（全文索引等）
   - [ ] B+树与B树的区别
 - [x] **索引优化与实践** (`MySQL索引原理（下）.md`)
   - [x] 索引回表机制
@@ -487,6 +492,7 @@ mvn jacoco:report
 - 最左前缀原则和索引下推优化
 - 联合索引的设计技巧和最佳实践
 - 主键选择对索引性能的影响
+- 普通索引与唯一索引的区别：查询性能差异（微乎其微）与更新性能差异（Change Buffer机制）
 
 #### 从MySQL日志的角度理解更新语句执行流程
 - 更新语句的完整执行步骤
@@ -494,8 +500,20 @@ mvn jacoco:report
 - 各步骤的宕机恢复机制
 - 两阶段提交的作用和必要性
 
-### Kafka笔记
-- **kafka核心组件.md**：梳理 Producer、Consumer、Broker、Controller 等核心组件的职责与协作关系，配合存储结构与位移管理理解端到端消息流转（路径：`notebook/Kafka/kafka核心组件.md`）
+### Kafka 笔记
+
+#### Kafka 核心组件 (`notebook/Kafka/kafka核心组件.md`)
+- [x] **Producer（生产者）**：消息生产与发送机制
+- [x] **Consumer（消费者）**：消息订阅与消费机制
+- [x] **Consumer Group（消费者组）**：横向扩展与避免重复消费
+- [x] **Topic（主题）**：消息分类与分区分配策略（Range、RoundRobin、Sticky）
+- [x] **Broker（代理节点）**：存储节点与网络请求处理
+- [x] **Partition（分区）**：物理存储单元与 Segment 结构
+- [x] **Replica（副本）**：Leader/Follower 机制与 ISR 集合
+- [x] **Offset（偏移量）**：消费位移管理与事务一致性
+- [x] **Controller（控制器）**：集群管理与副本选举
+- [x] **存储与可靠性**：日志追加、压缩、acks 配置、幂等性与事务性
+- [x] **协调组件**：ZooKeeper、Group Coordinator、Transaction Coordinator
 
 所有笔记都包含详细的原理说明、实际示例和实践建议，适合深入学习相关技术原理。
 

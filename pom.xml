@@ -8,6 +8,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>java-concurrency</module>
+        <module>netty-demo</module>
   </modules>
 
     <name>Code Demo Project</name>
